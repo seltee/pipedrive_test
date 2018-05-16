@@ -1,0 +1,21 @@
+.block-button-x{
+  transform: scale(1, 0.8);
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #7d7d7d;
+}
+
+.block-button{
+  line-height: 34px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #212121;
+  border: 1px solid #d5d5d5;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+  background-color: #fff;
+  padding: 0 24px;
+  height: 36px;
+}

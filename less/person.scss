@@ -1,0 +1,78 @@
+.person-component{
+  padding: 0 18px;
+  height: 54px;
+  border: 1px solid #e5e7e7;
+  cursor: pointer;
+  background-color: #fff;
+  position: relative;
+}
+
+.person-component .left-side{
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #575757;
+}
+
+.person-component .org-name{
+  font-size: 10px;
+  color: #a6a6a6;
+}
+
+.person-component .right-side{
+  display: inline-block;
+  float: right;
+  margin-top: 10px;
+}
+
+.person-component .right-side .avatar{
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.person-component .right-side .avatar img{
+  width: 32px;
+  height: 32px;
+}
+
+.person-component .right-side .avatar .empty{
+  background-color: #dfe6fc;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  color: #5b8fd8;
+  font-size: 12px;
+}
+
+.person-component.on-drag{
+  background-color: #c8c8c8;
+}
+
+.person-component.on-drag > div{
+  display: none;
+}
+
+.person-component .remove{
+  display: none;
+  position: absolute;
+  top: -2px;
+  right: 4px;
+}
+
+.person-component:hover .remove{
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+

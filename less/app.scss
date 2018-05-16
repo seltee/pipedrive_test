@@ -1,0 +1,182 @@
+.app-component{
+  background-color: #fff;
+}
+
+.app-component > .header{
+  height: 36px;
+  background-color: #3f4346;
+}
+
+.app-component > .header img{
+  display: inline-block;
+  height: 26px;
+  margin-top: 5px;
+}
+
+.app-component > .list-header{
+  height: 48px;
+  line-height: 48px;
+  color: #3c3d3d;
+  font-size: 15px;
+}
+
+.app-component > .list-search{
+  padding-top: 4px;
+}
+
+.app-component > .list-search input{
+  border: 1px solid #e5e7e7;
+  display: inline-block;
+  padding: 6px 18px;
+  font-size: 13px;
+  color: #3c3d3d;
+  width: calc(100% - 157px);
+  vertical-align: top;
+}
+
+.app-component > .list-search .add-person{
+  height: 27px;
+  line-height: 27px;
+  vertical-align: top;
+  float: right;
+  font-size: 12px;
+}
+
+.app-component > .list{
+  min-height: 200px;
+  padding-top: 4px;
+}
+
+.app-component > .pagination{
+  height: 40px;
+  line-height: 40px;
+}
+
+.app-component > .pagination .load-more{
+  width: auto;
+  display: block;
+  text-align: center;
+  margin-top: 6px;
+}
+
+.app-component > .footer{
+  height: 80px;
+}
+
+.app-component > .modal-component.person-modal .avatar{
+  width: 82px;
+  height: 82px;
+  border-radius: 82px;
+  overflow: hidden;
+  display: block;
+  margin: 35px auto 20px auto;
+}
+
+.app-component > .modal-component.person-modal .avatar img{
+  width: 82px;
+  height: 82px;
+}
+
+.app-component > .modal-component.person-modal .avatar .empty{
+  background-color: #dfe6fc;
+  width: 82px;
+  height: 82px;
+  line-height: 82px;
+  text-align: center;
+  color: #5b8fd8;
+  font-size: 17px;
+}
+
+.app-component > .modal-component.person-modal .title{
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 4px;
+  color: #242628;
+}
+
+.app-component > .modal-component.person-modal .phone{
+  color: #77da88;
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+
+.app-component > .modal-component.person-modal .value-list{
+  margin-top: 28px;
+  margin-bottom: 60px;
+}
+
+.app-component > .modal-component.person-modal .value-list > div{
+  margin-bottom: 24px;
+}
+
+.app-component > .modal-component.person-modal .value-list > div > span:first-of-type{
+  width: 110px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: right;
+  color: #818181;
+  font-size: 13px;
+}
+
+.app-component > .modal-component.person-modal .value-list > div > span:last-of-type{
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  margin-left: 25px;
+  width: 240px;
+  color: #c8c8c8;
+  font-size: 13px;
+}
+
+.app-component > .modal-component.person-modal .input-list{
+  margin-top: 28px;
+  margin-bottom: 60px;
+}
+
+.app-component > .modal-component.person-modal .input-list > div{
+  margin-bottom: 24px;
+}
+
+.app-component > .modal-component.person-modal .input-list > div > label{
+  width: 110px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: right;
+  color: #818181;
+  font-size: 13px;
+}
+
+.app-component > .modal-component.person-modal .input-list > div > input{
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  margin-left: 25px;
+  width: 200px;
+  color: #818181;
+  font-size: 13px;
+  border: none;
+  border-bottom: 1px solid #e5e7e7;
+}
+
+.app-component > .drag-container{
+  display: block;
+  position: absolute;
+  z-index: 2;
+  width: 950px;
+}
+
+.app-component .rc-draggable-list-draggableRow{
+  margin-bottom: 6px;
+}
+
+.app-component .rc-draggable-list-draggableRow:last-of-type{
+  margin-bottom: 0px;
+}
+
+
+
+
+
+
