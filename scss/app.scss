@@ -135,11 +135,12 @@
   margin-bottom: 60px;
 }
 
-.app-component > .modal-component.person-modal .input-list > div{
+.app-component > .modal-component.person-modal .input-list > label{
   margin-bottom: 24px;
+  display: block;
 }
 
-.app-component > .modal-component.person-modal .input-list > div > label{
+.app-component > .modal-component.person-modal .input-list > label > span{
   width: 110px;
   display: inline-block;
   vertical-align: top;
@@ -148,7 +149,7 @@
   font-size: 13px;
 }
 
-.app-component > .modal-component.person-modal .input-list > div > input{
+.app-component > .modal-component.person-modal .input-list > label > input{
   display: inline-block;
   vertical-align: top;
   text-align: left;

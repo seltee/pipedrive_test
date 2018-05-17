@@ -12,9 +12,9 @@ module.exports = {
     filename: "bundle.js"
   },
   resolve: {
-    extensions: ['.js', '.less'],
+    extensions: ['.js', '.scss'],
     alias: {
-      'less': path.resolve(__dirname, './less/'),
+      'scss': path.resolve(__dirname, './scss/'),
       'src': path.resolve(__dirname, './src/'),
     }
   },
@@ -31,9 +31,8 @@ module.exports = {
         test: /\.js$/,
         exclude: /\/node_modules/,
         use: [
-          {
-            loader: 'babel-loader'
-          }
+          'babel-loader',
+          "eslint-loader"
         ]
       },
       {

@@ -1,7 +1,7 @@
 export function getLetters(name) {
-  name = name.toUpperCase().split(' ');
-  let letters = [];
-  name.forEach((o) => {
+  const nameParts = name.toUpperCase().split(' ');
+  const letters = [];
+  nameParts.forEach((o) => {
     if (o.length > 1) {
       letters.push(o.charAt(0));
     }

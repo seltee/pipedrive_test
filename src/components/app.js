@@ -1,11 +1,11 @@
 import React from 'react';
-import {getPersonsList, removePerson, addPerson, setOrder} from "src/api/datapoint.js";
-import Person from "src/components/person.js";
-import Modal from "src/components/modal.js";
-import DragList from "react-drag-list";
-import {getLetters} from 'src/helpers.js';
+import { getPersonsList, removePerson, addPerson, setOrder } from 'src/api/datapoint';
+import Person from 'src/components/person';
+import Modal from 'src/components/modal';
+import DragList from 'react-drag-list';
+import { getLetters } from 'src/helpers';
 
-import "less/app.scss";
+import 'scss/app.scss';
 
 const order = 'fca445b80195f52fdb36b2a043465eebb8b62ad0';
 const group = '3b599d577a75c510b182a0fb2bcefc7c2a9fc3a7';
@@ -16,52 +16,46 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      connectionError: null,
       currentPage: 0,
       persons: [],
       moreExist: false,
-      personsFields: [],
       readMoreModal: false,
       readMorePerson: null,
-      search: "",
-      lastSearch: "",
+      search: '',
       addPersonModal: false,
-      addPersonName: "",
-      addPersonPhone: ""
-    }
-  };
+      addPersonName: '',
+      addPersonPhone: ''
+    };
+  }
 
   componentDidMount() {
     this.updatePersonsList();
-  };
+  }
 
   updatePersonsList = () => {
-    getPersonsList(this.state.search, order, 0).then(
-      (responce) => {
-        const {data, additional_data} = responce.data;
+    getPersonsList(this.state.search, order, 0).then((responce) => {
+      const { data, additional_data } = responce.data;
+      this.setState({
+        persons: data,
+        currentPage: 1,
+        moreExist: additional_data.pagination.more_items_in_collection
+      });
+    });
+  }
+
+
+  loadMore = () => {
+    getPersonsList(this.state.search, order, this.state.currentPage).then((response) => {
+      const { data, additional_data } = response.data;
+      const { persons, currentPage } = this.state;
+      if (data) {
         this.setState({
-          persons: data,
-          currentPage: 1,
+          persons: persons.concat(data),
+          currentPage: currentPage + 1,
           moreExist: additional_data.pagination.more_items_in_collection
         });
       }
-    );
-  };
-
-  loadMore = () => {
-    getPersonsList(this.state.search, order, this.state.currentPage).then(
-      (response) => {
-        const {data, additional_data} = response.data;
-        const {persons, currentPage} = this.state;
-        if (data) {
-          this.setState({
-            persons: persons.concat(data),
-            currentPage: currentPage + 1,
-            moreExist: additional_data.pagination.more_items_in_collection
-          });
-        }
-      }
-    );
+    });
   };
 
   readMore = (person) => {
@@ -71,21 +65,18 @@ export default class App extends React.Component {
     });
   };
 
-  removePerson = (person) => {
-    removePerson(person.id).then(this.updatePersonsList);
-  };
+  removePerson = (person) => removePerson(person.id).then(this.updatePersonsList);
 
-  openAddPersonModal = () =>{
+  openAddPersonModal = () => {
     this.setState({
       addPersonModal: true,
-      addPersonName: "",
-      addPersonPhone: ""
+      addPersonName: '',
+      addPersonPhone: ''
     });
   };
 
   addPerson = () => {
-    addPerson(this.state.addPersonName, this.state.addPersonPhone).then(
-      () => {
+    addPerson(this.state.addPersonName, this.state.addPersonPhone).then(() => {
       this.updatePersonsList();
       this.setState({
         addPersonModal: false
@@ -94,28 +85,26 @@ export default class App extends React.Component {
   };
 
   updateOrder = (event, updated) => {
-    this.state.persons.forEach((o, i) => {
+    updated.forEach((o, i) => {
       if (i !== o[order]) {
         setOrder(o.id, order, i);
       }
     });
   };
 
-  getDragListRow = (record, index) => {
-    return <Person person={record}
-                   openPerson={() => this.readMore(record)}
-                   removePerson={() => this.removePerson(record)}/>;
-  };
+  getDragListRow = (record) => (<Person
+    person={record}
+    openPerson={() => this.readMore(record)}
+    removePerson={() => this.removePerson(record)}
+  />);
 
-  handleSearch = e => {
-    let newVal = e.target.value;
+
+  handleSearch = (event) => {
+    const newVal = event.target.value;
 
     setTimeout(() => {
-      if (this.state.search == newVal) {
+      if (this.state.search === newVal) {
         this.updatePersonsList();
-        this.setState({
-          lastSearch: search
-        })
       }
     }, 300);
 
@@ -124,10 +113,10 @@ export default class App extends React.Component {
     });
   };
 
-  handleInput = e => {
-    let name = e.target.getAttribute('name');
-    let stateChange = {};
-    stateChange[name] = e.target.value;
+  handleInput = (event) => {
+    const name = event.target.getAttribute('name');
+    const stateChange = {};
+    stateChange[name] = event.target.value;
     this.setState(stateChange);
   };
 
@@ -139,16 +128,16 @@ export default class App extends React.Component {
   };
 
   render() {
-    let {persons, readMorePerson, readMoreModal, addPersonModal, moreExist, search,
-      addPersonName, addPersonPhone} = this.state;
-
-    console.log(persons);
+    const {
+      persons, readMorePerson, readMoreModal, addPersonModal, moreExist, search,
+      addPersonName, addPersonPhone
+    } = this.state;
 
     return (
       <div className="app-component">
         <div className="header">
           <div className="block980">
-            <img src="/logo.svg" />
+            <img src="/logo.svg" alt="" />
           </div>
         </div>
         <div className="list-header">
@@ -164,8 +153,14 @@ export default class App extends React.Component {
               onChange={this.handleSearch}
               placeholder="Search filter"
             />
-            <div className="block-button add-person"
-                 onClick={this.openAddPersonModal}>Add person
+            <div
+              className="block-button add-person"
+              onClick={this.openAddPersonModal}
+              onKeyPress={this.openAddPersonModal}
+              tabIndex={0}
+              role="button"
+            >
+              Add person
             </div>
           </div>
         </div>
@@ -188,8 +183,14 @@ export default class App extends React.Component {
           moreExist ?
             <div className="pagination">
               <div className="block980">
-                <div className="block-button load-more"
-                     onClick={this.loadMore}>Load more
+                <div
+                  className="block-button load-more"
+                  onClick={this.loadMore}
+                  onKeyPress={this.loadMore}
+                  tabIndex={0}
+                  role="button"
+                >
+                  Load more
                 </div>
               </div>
             </div> : null
@@ -197,77 +198,89 @@ export default class App extends React.Component {
 
         <div className="footer" />
 
-        <Modal open={ readMoreModal }
-               header={readMorePerson ? readMorePerson.name : ''}
-               className="person-modal"
-               toggle={this.toggleModal}>
+        <Modal
+          open={readMoreModal}
+          header={readMorePerson ? readMorePerson.name : ''}
+          className="person-modal"
+          toggle={this.toggleModal}
+        >
           {
-            readMorePerson ? <div>
-              <div className="avatar">
-                {
-                  readMorePerson.picture_id ?
-                    <img src={readMorePerson.picture_id.pictures['128']}/>
-                    :
-                    <div className="empty">{
-                      getLetters(readMorePerson.name)
-                    }</div>
-                }
-              </div>
+            readMorePerson ?
+              <div>
+                <div className="avatar">
+                  {
+                    readMorePerson.picture_id ?
+                      <img src={readMorePerson.picture_id.pictures['128']} alt="" />
+                      :
+                      <div className="empty">
+                        {
+                          getLetters(readMorePerson.name)
+                        }
+                      </div>
+                  }
+                </div>
 
-              <div className="title">{readMorePerson.name}</div>
-              <div className="phone">{readMorePerson.phone[0].value}</div>
-              <hr />
-              <div className="value-list">
-                <div>
-                  <span>Email</span>
-                  <span>{readMorePerson.email[0].value}</span>
-                </div>
-                <div>
-                  <span>Organization</span>
-                  <span>{readMorePerson.org_name}</span>
-                </div>
-                <div>
-                  <span>Assistant</span>
-                  <span>
-                    {readMorePerson[assistant] && readMorePerson[assistant].name}
+                <div className="title">{readMorePerson.name}</div>
+                <div className="phone">{readMorePerson.phone[0].value}</div>
+                <hr />
+                <div className="value-list">
+                  <div>
+                    <span>Email</span>
+                    <span>{readMorePerson.email[0].value}</span>
+                  </div>
+                  <div>
+                    <span>Organization</span>
+                    <span>{readMorePerson.org_name}</span>
+                  </div>
+                  <div>
+                    <span>Assistant</span>
+                    <span>
+                      {readMorePerson[assistant] && readMorePerson[assistant].name}
                     </span>
+                  </div>
+                  <div>
+                    <span>Groups</span>
+                    <span>{readMorePerson[group] && readMorePerson[group].name}</span>
+                  </div>
+                  <div>
+                    <span>Location</span>
+                    <span>{readMorePerson.org_id && readMorePerson.org_id.address}</span>
+                  </div>
                 </div>
-                <div>
-                  <span>Groups</span>
-                  <span>{readMorePerson[group] && readMorePerson[group].name}</span>
-                </div>
-                <div>
-                  <span>Location</span>
-                  <span>{readMorePerson.org_id && readMorePerson.org_id.address}</span>
-                </div>
-              </div>
-            </div> : null
+              </div> : null
           }
         </Modal>
 
-        <Modal open={ addPersonModal } header="Adding person"
-               className="person-modal"
-               toggle={this.toggleModal}
-               confirm={this.addPerson}>
+        <Modal
+          header="Adding person"
+          open={addPersonModal}
+          className="person-modal"
+          toggle={this.toggleModal}
+          confirm={this.addPerson}
+        >
           <div className="input-list">
-            <div>
-              <label>Name</label>
-              <input value={addPersonName}
-                     onChange={this.handleInput}
-                     name="addPersonName"
+            <label htmlFor="addPersonName">
+              <span>Name</span>
+              <input
+                id="addPersonName"
+                value={addPersonName}
+                onChange={this.handleInput}
+                name="addPersonName"
               />
-            </div>
-            <div>
-              <label>Phone</label>
-              <input value={addPersonPhone}
-                     onChange={this.handleInput}
-                     name="addPersonPhone"
+            </label>
+            <label htmlFor="addPersonPhone">
+              <span>Phone</span>
+              <input
+                id="addPersonPhone"
+                value={addPersonPhone}
+                onChange={this.handleInput}
+                name="addPersonPhone"
               />
-            </div>
+            </label>
           </div>
         </Modal>
 
       </div>
-    )
+    );
   }
-};
+}

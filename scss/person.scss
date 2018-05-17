@@ -7,6 +7,10 @@
   position: relative;
 }
 
+.person-component:focus{
+  border: 1px solid #959797;
+}
+
 .person-component .left-side{
   display: inline-block;
   margin-top: 12px;
