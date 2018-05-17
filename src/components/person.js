@@ -20,6 +20,13 @@ export default class Person extends React.Component {
   render() {
     const { person, openPerson } = this.props;
 
+    let picture = null;
+    if (person.picture_id) {
+      picture = person.picture_id.pictures['128'];
+    } else if (person.picture) {
+      picture = person.picture.url;
+    }
+
     return (
       <div
         className="person-component noselect"
@@ -46,8 +53,8 @@ export default class Person extends React.Component {
         <div className="right-side">
           <div className="avatar">
             {
-              person.picture_id ?
-                <img src={person.picture_id.pictures['128']} alt="" />
+              picture ?
+                <img src={picture} alt="" />
                 :
                 <div className="empty">
                   {
