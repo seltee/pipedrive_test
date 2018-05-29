@@ -1,3 +1,8 @@
+# Note
+My account test period on the Pipedrive has been expired and to run this test you need to register your own, then go to the /src/api/datapoint.js and change api token to yours.
+Without doing this it's will not run.
+
+# How to run
 Npm must be installed. In the directory type the following:
 
 npm i
